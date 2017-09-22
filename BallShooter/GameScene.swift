@@ -11,12 +11,15 @@ import GameplayKit
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
+    var viewController: GameViewController!
+    
     static var screenHeight:CGFloat!
     static var screenWidth:CGFloat!
     static var brickSize:CGFloat!
     static var boardPosition:CGRect!
     var frames:Int!
     
+    var highscoreLabel:SKLabelNode!
     var scoreLabel:SKLabelNode!
     var score:Int = 0 {
         didSet {
@@ -40,6 +43,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var bricks = [Brick]()
     var bricksHit = [String]()
     
+    var powerUps = [PowerUp]()
+    var additionalBalls = 0
+    
     var roof:SKShapeNode!
     var rightWall:SKShapeNode!
     var leftWall:SKShapeNode!
@@ -62,9 +68,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let rightWallCategory:UInt32 = 0x1 << 3
     let leftWallCategory:UInt32 = 0x1 << 4
     let bottomCategory:UInt32 = 0x1 << 5
+    let powerUpCategory:UInt32 = 0x1 << 6
     
     enum GameState {
-        case startUp, readyToPlay, playing, changeLevel, checkGameOver
+        case startUp, readyToPlay, playing, changeLevel, checkGameOver, endGame
     }
     var gameState:GameState!
     var gameOver:Bool!
@@ -92,7 +99,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addBall()
         addPowerUp()
         addBricks()
-        moveBricksDown()
+        moveObjectsDown()
     }
     
     func createBoard() {
@@ -108,9 +115,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         GameScene.boardPosition = CGRect(x: 0, y: remainderHeight, width: GameScene.screenWidth, height: boardHeight)
         
+        //Add highscore label
+        let defaults = UserDefaults.standard
+        highscoreLabel = SKLabelNode(text: "Best: \(defaults.object(forKey: "highscore") as? Int ?? 1)")
+        highscoreLabel.position = CGPoint(x: 100, y: GameScene.screenHeight - remainderHeight - 15)
+        highscoreLabel.fontName = "AmericanTypewriter-Bold"
+        highscoreLabel.fontSize = 30
+        highscoreLabel.fontColor = UIColor.white
+        self.addChild(highscoreLabel)
+        
         //Add score label
         scoreLabel = SKLabelNode(text: "0")
-        scoreLabel.position = CGPoint(x: GameScene.screenWidth / 2, y: GameScene.screenHeight - remainderHeight - (remainderHeight / 2))
+        scoreLabel.position = CGPoint(x: GameScene.screenWidth / 2, y: GameScene.screenHeight - remainderHeight - (remainderHeight / 3))
         scoreLabel.fontName = "AmericanTypewriter-Bold"
         scoreLabel.fontSize = remainderHeight
         scoreLabel.fontColor = UIColor.white
@@ -151,7 +167,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
             
             //Only accept degrees from 5 - 175
-            if self.ballRotation > CGFloat.pi / 18 && self.ballRotation < CGFloat.pi - (CGFloat.pi / 18) {
+            if self.ballRotation > CGFloat.pi / 36 && self.ballRotation < CGFloat.pi - (CGFloat.pi / 36) {
                 removeBall(index: 0)
                 ballCount = 0
                 self.gameState = .playing
@@ -229,7 +245,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
             
             //Only accept degrees from 5 - 175
-            if self.ballRotation > CGFloat.pi / 18 && self.ballRotation < CGFloat.pi - (CGFloat.pi / 18) {
+            if self.ballRotation > CGFloat.pi / 36 && self.ballRotation < CGFloat.pi - (CGFloat.pi / 36) {
                 self.launchLine.isHidden = false
             } else {
                 self.launchLine.isHidden = true
@@ -289,7 +305,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func addPowerUp() {
+        let randomPlacement = Int(arc4random_uniform(7))
+        let ballPU = BallPU(placement: randomPlacement, categoryBitMask: powerUpCategory, contactTestBitMask: ballCategory, tileSize: GameScene.brickSize)
         
+        powerUps.append(ballPU)
+        self.addChild(ballPU.powerUpNode)
     }
     
     func addBall() {
@@ -372,6 +392,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     }
                 } else if (secondBody.categoryBitMask & roofCategory) != 0 || (secondBody.categoryBitMask & rightWallCategory) != 0 || (secondBody.categoryBitMask & leftWallCategory) != 0 || (secondBody.categoryBitMask & bottomCategory) != 0 {
                     ballDidHitWall(ballNode: firstBody.node as! SKShapeNode, wallNode: secondBody.node as! SKShapeNode)
+                } else if (secondBody.categoryBitMask & powerUpCategory) != 0 {
+                    ballDidHitPowerUp(ballNode: firstBody.node as! SKShapeNode, powerUpNode: secondBody.node as! SKShapeNode)
                 } else {
                     //Nothing as of yet
                 }
@@ -440,6 +462,34 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
+    func ballDidHitPowerUp(ballNode:SKShapeNode, powerUpNode:SKShapeNode) {
+        var powerUp:PowerUp!
+        var index = 0
+        for pU in powerUps {
+            if pU.powerUpNode == powerUpNode {
+                powerUp = pU
+                break
+            }
+            index += 1
+        }
+        
+        if powerUp != nil {
+            switch powerUp.type! {
+            case .Ball:
+                print("Hit ball")
+                self.additionalBalls += 1
+                powerUp.removeFromScreen()
+                powerUps.remove(at: index)
+                break
+            case .Star:
+                //No stars yet
+                break
+            }
+        } else {
+            print("NIL POWERUP")
+        }
+    }
+    
     func removeBall(index: Int) {
         self.balls[index].node.removeFromParent()
         self.balls.remove(at: index)
@@ -449,13 +499,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         gameState = .changeLevel
         firstBallEnded = false
         ballX = newBallX
+        
+        //Resets the ball counters and adds any adition balls gained from powerUps
         ballCount = 0
-        maxBallCount! += 1
+        maxBallCount! += additionalBalls
+        additionalBalls = 0
+        
         frames = 0
         score += 1
         addBall()
+        addPowerUp()
         addBricks()
-        moveBricksDown()
+        moveObjectsDown()
+        
+        checkHighScore()
         
         //Show the number of balls
         self.numBallsLabel.position.x = ballX
@@ -464,6 +521,32 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         //Removes newBallPosition marker
         self.newPositionMarker.isHidden = true
+    }
+    
+    func checkHighScore() {
+        let defaults = UserDefaults.standard
+        if score > defaults.object(forKey: "highscore") as? Int ?? 0 {
+            defaults.set(score, forKey: "highscore")
+            highscoreLabel.text = "Best: \(score)"
+        }
+    }
+    
+    func moveObjectsDown() {
+        movePowerUpsDown()
+        moveBricksDown()
+    }
+    
+    func movePowerUpsDown() {
+        if powerUps.count > 0 {
+            for i in (0...powerUps.count - 1).reversed() {
+                
+                //If powerUp is off of board
+                if !powerUps[i].moveDown() {
+                    powerUps.remove(at: i)
+                }
+                
+            }
+        }
     }
     
     func moveBricksDown() {
@@ -482,14 +565,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func endGame() {
-        bricks.forEach({ brick1 in
-            brick1.valueLabel.removeFromParent()
-            brick1.brickNode.removeFromParent()
-        })
-        bricks.removeAll()
         
-        newPositionMarker.isHidden = true
-        gameOver = false
+        for child in self.children {
+            child.removeFromParent()
+        }
+        
+        bricks.removeAll()
+        powerUps.removeAll()
+        balls.removeAll()
+        self.viewController.transitionToGameOver(score: score)
     }
     
     override func update(_ currentTime: TimeInterval) {
@@ -523,12 +607,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         case .checkGameOver:
             
             if gameOver {
-                gameState = .startUp
+                gameState = .endGame
                 endGame()
             } else {
                 gameState = .readyToPlay
             }
             
+            break
+        case .endGame:
             break
         }
     }

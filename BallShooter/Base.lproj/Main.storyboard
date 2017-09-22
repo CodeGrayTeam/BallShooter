@@ -22,23 +22,94 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tzn-Wf-Bfa">
-                                <rect key="frame" x="172" y="318" width="30" height="30"/>
-                                <state key="normal" title="Play"/>
+                                <rect key="frame" x="155.5" y="328" width="63" height="47"/>
+                                <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="30"/>
+                                <state key="normal" title="Play">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
                                 <connections>
                                     <action selector="play:" destination="WeF-52-GH0" eventType="touchUpInside" id="xL5-gx-Km4"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Best: 0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zEA-xQ-sBC">
+                                <rect key="frame" x="105" y="170" width="164" height="58"/>
+                                <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="50"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.4431372549" green="0.44705882349999998" blue="0.6428222656" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="tzn-Wf-Bfa" firstAttribute="centerY" secondItem="Ndt-FF-GRF" secondAttribute="centerY" id="0oS-Kx-D2u"/>
                             <constraint firstItem="tzn-Wf-Bfa" firstAttribute="centerX" secondItem="Ndt-FF-GRF" secondAttribute="centerX" id="2dU-Rk-naJ"/>
+                            <constraint firstItem="zEA-xQ-sBC" firstAttribute="centerX" secondItem="Ndt-FF-GRF" secondAttribute="centerX" id="ORq-EP-4BS"/>
+                            <constraint firstItem="zEA-xQ-sBC" firstAttribute="top" secondItem="Kg7-Xx-i2L" secondAttribute="bottom" constant="150" id="iHJ-7U-Nhh"/>
+                            <constraint firstItem="tzn-Wf-Bfa" firstAttribute="top" secondItem="zEA-xQ-sBC" secondAttribute="bottom" constant="100" id="l9w-8T-gmB"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="bestLabel" destination="zEA-xQ-sBC" id="odM-tg-oTs"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xkK-91-o2C" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1052" y="56"/>
+        </scene>
+        <!--Game OverVC-->
+        <scene sceneID="dg5-NV-dau">
+            <objects>
+                <viewController storyboardIdentifier="gameOverVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="NV9-aI-f74" customClass="GameOverVC" customModule="BallShooter" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="zlm-ib-Uif"/>
+                        <viewControllerLayoutGuide type="bottom" id="U0Q-c1-Yaq"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="0Cs-jH-Xoq">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Game Over" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CtX-Uc-Uuk">
+                                <rect key="frame" x="109" y="170" width="157.5" height="35"/>
+                                <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="30"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score: 0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Vr-4O-G7g">
+                                <rect key="frame" x="139" y="255" width="96.5" height="29"/>
+                                <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="25"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u7w-d6-5br">
+                                <rect key="frame" x="137" y="334" width="100" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="6OL-hE-u96"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="20"/>
+                                <state key="normal" title="Continue">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="continue:" destination="NV9-aI-f74" eventType="touchUpInside" id="OeA-vk-Cef"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.4431372549" green="0.44705882349999998" blue="0.6428222656" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="CtX-Uc-Uuk" firstAttribute="centerX" secondItem="0Cs-jH-Xoq" secondAttribute="centerX" id="HAB-UZ-kdo"/>
+                            <constraint firstItem="6Vr-4O-G7g" firstAttribute="top" secondItem="CtX-Uc-Uuk" secondAttribute="bottom" constant="50" id="PdN-o1-Bin"/>
+                            <constraint firstItem="6Vr-4O-G7g" firstAttribute="centerX" secondItem="0Cs-jH-Xoq" secondAttribute="centerX" id="nOX-Jf-ido"/>
+                            <constraint firstItem="u7w-d6-5br" firstAttribute="top" secondItem="6Vr-4O-G7g" secondAttribute="bottom" constant="50" id="siK-hy-Rkt"/>
+                            <constraint firstItem="CtX-Uc-Uuk" firstAttribute="top" secondItem="zlm-ib-Uif" secondAttribute="bottom" constant="150" id="vZc-Mx-q5E"/>
+                            <constraint firstItem="u7w-d6-5br" firstAttribute="centerX" secondItem="0Cs-jH-Xoq" secondAttribute="centerX" id="wVR-kI-Loo"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="continueButton" destination="u7w-d6-5br" id="qFV-7R-rAl"/>
+                        <outlet property="scoreLabel" destination="6Vr-4O-G7g" id="2ES-Jw-kwt"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tu8-Fm-2ya" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1052" y="744"/>
         </scene>
         <!--Game View Controller-->
         <scene sceneID="tXr-a1-R10">
@@ -51,7 +122,7 @@
                     <view key="view" multipleTouchEnabled="YES" contentMode="scaleToFill" id="3se-qz-xqx" customClass="SKView">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.521728515625" green="0.44777855963968732" blue="0.642822265625" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.44313725490196076" green="0.44705882352941173" blue="0.642822265625" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <connections>
                         <outlet property="view" destination="3se-qz-xqx" id="BtE-cB-1yD"/>

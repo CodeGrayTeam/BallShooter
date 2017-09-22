@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		FC52A6851F6CEAAE00606175 /* Brick.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC52A6841F6CEAAE00606175 /* Brick.swift */; };
 		FC52A6871F6F0DC800606175 /* OpenningVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC52A6861F6F0DC800606175 /* OpenningVC.swift */; };
+		FC52A6891F75528300606175 /* PowerUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC52A6881F75528300606175 /* PowerUp.swift */; };
+		FC52A68B1F75573D00606175 /* BallPU.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC52A68A1F75573D00606175 /* BallPU.swift */; };
+		FC52A68E1F756E3E00606175 /* GameOverVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC52A68D1F756E3E00606175 /* GameOverVC.swift */; };
 		FC57C4F41F6C271300C78C78 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC57C4F31F6C271300C78C78 /* AppDelegate.swift */; };
 		FC57C4F61F6C271300C78C78 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = FC57C4F51F6C271300C78C78 /* GameScene.sks */; };
 		FC57C4F81F6C271300C78C78 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = FC57C4F71F6C271300C78C78 /* Actions.sks */; };
@@ -23,6 +26,9 @@
 /* Begin PBXFileReference section */
 		FC52A6841F6CEAAE00606175 /* Brick.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Brick.swift; sourceTree = "<group>"; };
 		FC52A6861F6F0DC800606175 /* OpenningVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenningVC.swift; sourceTree = "<group>"; };
+		FC52A6881F75528300606175 /* PowerUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PowerUp.swift; sourceTree = "<group>"; };
+		FC52A68A1F75573D00606175 /* BallPU.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BallPU.swift; sourceTree = "<group>"; };
+		FC52A68D1F756E3E00606175 /* GameOverVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverVC.swift; sourceTree = "<group>"; };
 		FC57C4F01F6C271300C78C78 /* BallShooter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BallShooter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC57C4F31F6C271300C78C78 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FC57C4F51F6C271300C78C78 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -47,6 +53,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FC52A68C1F75574300606175 /* PowerUps */ = {
+			isa = PBXGroup;
+			children = (
+				FC52A6881F75528300606175 /* PowerUp.swift */,
+				FC52A68A1F75573D00606175 /* BallPU.swift */,
+			);
+			name = PowerUps;
+			sourceTree = "<group>";
+		};
 		FC57C4E71F6C271200C78C78 = {
 			isa = PBXGroup;
 			children = (
@@ -70,9 +85,11 @@
 				FC57C4F51F6C271300C78C78 /* GameScene.sks */,
 				FC57C4F71F6C271300C78C78 /* Actions.sks */,
 				FC57C4F91F6C271300C78C78 /* GameScene.swift */,
+				FC52A68C1F75574300606175 /* PowerUps */,
 				FC57C50B1F6C35D200C78C78 /* Ball.swift */,
 				FC52A6841F6CEAAE00606175 /* Brick.swift */,
 				FC57C4FB1F6C271300C78C78 /* GameViewController.swift */,
+				FC52A68D1F756E3E00606175 /* GameOverVC.swift */,
 				FC52A6861F6F0DC800606175 /* OpenningVC.swift */,
 				FC57C4FD1F6C271300C78C78 /* Main.storyboard */,
 				FC57C5021F6C271300C78C78 /* LaunchScreen.storyboard */,
@@ -158,11 +175,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				FC52A6851F6CEAAE00606175 /* Brick.swift in Sources */,
+				FC52A6891F75528300606175 /* PowerUp.swift in Sources */,
 				FC57C50C1F6C35D200C78C78 /* Ball.swift in Sources */,
 				FC52A6871F6F0DC800606175 /* OpenningVC.swift in Sources */,
 				FC57C4FA1F6C271300C78C78 /* GameScene.swift in Sources */,
 				FC57C4FC1F6C271300C78C78 /* GameViewController.swift in Sources */,
 				FC57C4F41F6C271300C78C78 /* AppDelegate.swift in Sources */,
+				FC52A68B1F75573D00606175 /* BallPU.swift in Sources */,
+				FC52A68E1F756E3E00606175 /* GameOverVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

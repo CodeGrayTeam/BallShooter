@@ -10,6 +10,7 @@ import UIKit
 
 class OpenningVC: UIViewController {
     
+    @IBOutlet weak var bestLabel: UILabel!
     
     @IBAction func play(_ sender: UIButton) {
         let gameVC = self.storyboard?.instantiateViewController(withIdentifier: "gameVC") as! GameViewController
@@ -19,6 +20,8 @@ class OpenningVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let defaults = UserDefaults.standard
+        bestLabel.text = "Best: \(defaults.object(forKey: "highscore") as? Int ?? 0)"
     }
     
     override func didReceiveMemoryWarning() {
