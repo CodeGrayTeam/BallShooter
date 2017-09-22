@@ -150,8 +150,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 self.ballRotation = atan(y/absX)
             }
             
-            //Only accept degrees from 20 - 160
-            if self.ballRotation > CGFloat.pi / 9 && self.ballRotation < CGFloat.pi - (CGFloat.pi / 9) {
+            //Only accept degrees from 5 - 175
+            if self.ballRotation > CGFloat.pi / 18 && self.ballRotation < CGFloat.pi - (CGFloat.pi / 18) {
                 removeBall(index: 0)
                 ballCount = 0
                 self.gameState = .playing
@@ -193,31 +193,47 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
             let xSlope = x - ballX
             let ySlope = y - ballLaunchY
+            let slope = ySlope / xSlope
+            let b = ballLaunchY - slope * ballX
             
             
             var points = [CGPoint(x: ballX, y: ballLaunchY), CGPoint(x: x, y: y)]
             
             
-            while (newX < GameScene.screenWidth && newX > 0) && (newY < GameScene.boardPosition.origin.y + GameScene.boardPosition.height) {
+            while (newX < GameScene.screenWidth && newX > 0) && (newY < GameScene.boardPosition.origin.y + GameScene.boardPosition.height && newY > GameScene.boardPosition.origin.y) {
                 newX += xSlope
                 newY += ySlope
                 
-//                if newY > GameScene.boardPosition.origin.y + GameScene.boardPosition.height {
-//                    let percentOfYChange = (ySlope - newY - GameScene.boardPosition.origin.y + GameScene.boardPosition.height) / ySlope
-//                    newY = GameScene.boardPosition.origin.y + GameScene.boardPosition.height
-//                    newX -= xSlope
-//                    newX += (xSlope * percentOfYChange)
-//                }
+                if newY > GameScene.boardPosition.origin.y + GameScene.boardPosition.height {
+                    newY = GameScene.boardPosition.origin.y + GameScene.boardPosition.height
+                    newX = (newY - b) / slope
+                }
                 
                 points.append(CGPoint(x: newX, y: newY))
             }
-                
                 
             launchLine = SKShapeNode(points: &points, count: points.count)
             launchLine.lineWidth = 2
             launchLine.strokeColor = SKColor.white
             launchLine.fillColor = SKColor.white
             self.addChild(launchLine)
+            
+            let diffX = launchLineX - ballX
+            let absX = abs(diffX)
+            let diffY = launchLineY - ballLaunchY
+            
+            if diffX < 0 {
+                self.ballRotation = CGFloat.pi - atan(diffY/absX)
+            } else {
+                self.ballRotation = atan(diffY/absX)
+            }
+            
+            //Only accept degrees from 5 - 175
+            if self.ballRotation > CGFloat.pi / 18 && self.ballRotation < CGFloat.pi - (CGFloat.pi / 18) {
+                self.launchLine.isHidden = false
+            } else {
+                self.launchLine.isHidden = true
+            }
         }
     }
     
