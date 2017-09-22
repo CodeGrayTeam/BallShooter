@@ -24,6 +24,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
+    var newPositionMarker:SKLabelNode!
+    var numBallsLabel:SKLabelNode!
+    var numBalls:Int = 1 {
+        didSet {
+            numBallsLabel.text = "x\(numBalls)"
+        }
+    }
+    
     var ballShootTimer:Timer!
     var balls = [Ball]()
     var ballCount:Int!
@@ -36,10 +44,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var rightWall:SKShapeNode!
     var leftWall:SKShapeNode!
     var bottom:SKShapeNode!
+    
     var launchLine = SKShapeNode()
     var launchLineX:CGFloat = 0.0
     var launchLineY:CGFloat = 0.0
+    var ballX:CGFloat!
+    var newBallX:CGFloat!
+    var ballY:CGFloat!
+    var ballRadius:CGFloat = 15.0
+    
     var ballRotation:CGFloat!
+    var firstBallEnded:Bool!
     
     let ballCategory:UInt32 = 0x1 << 0
     let brickCategory:UInt32 = 0x1 << 1
@@ -63,6 +78,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         maxBallCount = 1
         frames = 0
         gameOver = false
+        firstBallEnded = false
         ballRotation = 0.0
     
         initialize()
@@ -70,8 +86,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func initialize() {
         createBoard()
+        ballX = GameScene.boardPosition.width / 2
+        ballY = GameScene.boardPosition.origin.y + 2
         addWalls()
-        //addBall()
+        addBall()
+        addPowerUp()
         addBricks()
         moveBricksDown()
     }
@@ -97,17 +116,33 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         scoreLabel.fontColor = UIColor.white
         self.addChild(scoreLabel)
         score = 1
+        
+        //Add ball amount label
+        numBallsLabel = SKLabelNode(text: "x1")
+        numBallsLabel.position = CGPoint(x: GameScene.screenWidth / 2, y: remainderHeight - 20)
+        numBallsLabel.fontName = "AmericanTypewriter-Bold"
+        numBallsLabel.fontSize = 20
+        numBallsLabel.fontColor = UIColor.white
+        self.addChild(numBallsLabel)
+        
+        //Add new ball position label
+        newPositionMarker = SKLabelNode(text: "x")
+        newPositionMarker.position = CGPoint(x: GameScene.screenWidth / 2, y: remainderHeight + 5)
+        newPositionMarker.fontName = "AmericanTypewriter-Bold"
+        newPositionMarker.fontSize = 20
+        newPositionMarker.fontColor = UIColor.white
+        newPositionMarker.isHidden = true
+        self.addChild(newPositionMarker)
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         if gameState! == GameState.readyToPlay {
-            let ballX = GameScene.boardPosition.width / 2
-            let ballY = GameScene.boardPosition.origin.y + 15
-            
             let x = launchLineX - ballX
-                
+            
+            let ballLaunchY = ballY + ballRadius
             let absX = abs(x)
-            let y = launchLineY - ballY
+            
+            let y = launchLineY - ballLaunchY
             
             if x < 0 {
                 self.ballRotation = CGFloat.pi - atan(y/absX)
@@ -115,14 +150,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 self.ballRotation = atan(y/absX)
             }
             
-            print("CHANGE: \(ballRotation)")
+            //Only accept degrees from 20 - 160
+            if self.ballRotation > CGFloat.pi / 9 && self.ballRotation < CGFloat.pi - (CGFloat.pi / 9) {
+                removeBall(index: 0)
+                ballCount = 0
+                self.gameState = .playing
+            }
             
             removeLaunchLine()
-            self.gameState = .playing
-
             
         }
     }
+    
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         if gameState! == GameState.readyToPlay {
             if let touch = touches.first {
@@ -150,25 +189,32 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             var newX = x
             var newY = y
             
-            let ballX = GameScene.boardPosition.width / 2
-            let ballY = GameScene.boardPosition.origin.y + 15
+            let ballLaunchY = ballY + ballRadius
             
             let xSlope = x - ballX
-            let ySlope = y - ballY
+            let ySlope = y - ballLaunchY
             
             
-            var points = [CGPoint(x: ballX, y: ballY), CGPoint(x: x, y: y)]
+            var points = [CGPoint(x: ballX, y: ballLaunchY), CGPoint(x: x, y: y)]
             
             
-            while (newX < GameScene.screenWidth && newX > 0) && (newY < GameScene.screenHeight) {
+            while (newX < GameScene.screenWidth && newX > 0) && (newY < GameScene.boardPosition.origin.y + GameScene.boardPosition.height) {
                 newX += xSlope
                 newY += ySlope
-                points.append(CGPoint(x: newX + xSlope, y: newY + ySlope))
+                
+//                if newY > GameScene.boardPosition.origin.y + GameScene.boardPosition.height {
+//                    let percentOfYChange = (ySlope - newY - GameScene.boardPosition.origin.y + GameScene.boardPosition.height) / ySlope
+//                    newY = GameScene.boardPosition.origin.y + GameScene.boardPosition.height
+//                    newX -= xSlope
+//                    newX += (xSlope * percentOfYChange)
+//                }
+                
+                points.append(CGPoint(x: newX, y: newY))
             }
                 
                 
             launchLine = SKShapeNode(points: &points, count: points.count)
-            launchLine.lineWidth = 5
+            launchLine.lineWidth = 2
             launchLine.strokeColor = SKColor.white
             launchLine.fillColor = SKColor.white
             self.addChild(launchLine)
@@ -184,6 +230,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func moveLine(x: CGFloat, y: CGFloat) {
         removeLaunchLine()
         createLaunchLine(x: x, y: y)
+    }
+    
+    func updateRotation() {
+        balls[0].rotation = ballRotation
+        balls[0].calculateSpeeds()
     }
     
     func addBricks() {
@@ -221,14 +272,22 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
+    func addPowerUp() {
+        
+    }
+    
     func addBall() {
-        print("BALL: \(ballRotation)")
-        let radius:CGFloat = 15.0
-        let ball = Ball(image: "", borderColour: .blue, fillColour: .white, radius: radius, xPosition: GameScene.screenWidth / 2, yPosition: GameScene.boardPosition.origin.y + radius + 2, speed: 20, rotation: ballRotation!, categoryBitMask: ballCategory, contactTestBitMask: brickCategory, collisionBitMask: leftWallCategory | rightWallCategory | roofCategory | bottomCategory | brickCategory, ballNum: self.ballCount)
+        let ball = Ball(image: "", borderColour: .white, fillColour: .white, radius: ballRadius, xPosition: ballX, yPosition: ballY + ballRadius, speed: 20, rotation: ballRotation!, categoryBitMask: ballCategory, contactTestBitMask: brickCategory, collisionBitMask: leftWallCategory | rightWallCategory | roofCategory | bottomCategory | brickCategory, ballNum: self.ballCount)
+        
         balls.append(ball)
         self.addChild(ball.node)
         
         self.ballCount! += 1
+        self.numBalls = self.maxBallCount - self.ballCount + 1
+        
+        if numBalls == 1 {
+            self.numBallsLabel.isHidden = true
+        }
     }
     
     func addWalls() {
@@ -304,21 +363,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
-    func retreiveBricksWithMultipleContatcs(ballPhysicsBody:SKPhysicsBody, brickPhysicsBody:SKPhysicsBody) -> [String] {
-        var brickNames = [String]()
-        var dupBrickNames = [String]()
-        
-        for body in ballPhysicsBody.allContactedBodies() {
-            if !brickNames.contains((body.node?.name)!) {
-                brickNames.append((body.node?.name)!)
-            } else {
-                dupBrickNames.append((body.node?.name)!)
-            }
-        }
-        
-        return dupBrickNames
-    }
-    
     func ballDidHitBrick(ballNode:SKShapeNode, brickNode:SKShapeNode, decreasePoint: Bool, contact: SKPhysicsContact) {
         var ball:Ball!
         var brick:Brick!
@@ -354,10 +398,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     //The roof is technically like hitting the bottom of a brick
                     balls[i].changeYDirection(isTop: false)
                 } else if wallNode.physicsBody?.categoryBitMask == bottomCategory {
+                    
+                    if !firstBallEnded {
+                        firstBallEnded = true
+                        newBallX = ballNode.position.x
+                        newPositionMarker.position.x = newBallX
+                        newPositionMarker.isHidden = false
+                    }
+                    
                     //Remove ball if it hits the bottom
-                    self.balls[i].node.removeFromParent()
-                    self.balls.remove(at: i)
-
+                    removeBall(index: i)
+                    
                     if balls.count == 0 {
                         changeLevel()
                     }
@@ -373,13 +424,30 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
+    func removeBall(index: Int) {
+        self.balls[index].node.removeFromParent()
+        self.balls.remove(at: index)
+    }
+    
     func changeLevel() {
         gameState = .changeLevel
+        firstBallEnded = false
+        ballX = newBallX
         ballCount = 0
         maxBallCount! += 1
+        frames = 0
         score += 1
+        addBall()
         addBricks()
         moveBricksDown()
+        
+        //Show the number of balls
+        self.numBallsLabel.position.x = ballX
+        self.numBallsLabel.isHidden = false
+        self.numBalls = maxBallCount
+        
+        //Removes newBallPosition marker
+        self.newPositionMarker.isHidden = true
     }
     
     func moveBricksDown() {
@@ -403,6 +471,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             brick1.brickNode.removeFromParent()
         })
         bricks.removeAll()
+        
+        newPositionMarker.isHidden = true
         gameOver = false
     }
     
@@ -415,6 +485,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             //Nothing as of yet
             break
         case .playing:
+            
             if balls.count > 0 {
                 for i in 0...balls.count - 1 {
                     balls[i].moveBall()
