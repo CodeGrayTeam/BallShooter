@@ -12,6 +12,8 @@ import GameplayKit
 
 class GameViewController: UIViewController {
     
+    var mode:String = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -22,6 +24,7 @@ class GameViewController: UIViewController {
                 scene.scaleMode = .aspectFill
                 scene.backgroundColor = SKColor.init(red: (113/255), green: (114/255), blue: (164/255), alpha: 1.0)
                 scene.viewController = self
+                scene.mode = mode
                 
                 // Present the scene
                 view.presentScene(scene)

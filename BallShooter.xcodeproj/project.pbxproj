@@ -12,6 +12,8 @@
 		FC52A6891F75528300606175 /* PowerUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC52A6881F75528300606175 /* PowerUp.swift */; };
 		FC52A68B1F75573D00606175 /* BallPU.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC52A68A1F75573D00606175 /* BallPU.swift */; };
 		FC52A68E1F756E3E00606175 /* GameOverVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC52A68D1F756E3E00606175 /* GameOverVC.swift */; };
+		FC52A6901F78313B00606175 /* GameModeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC52A68F1F78313B00606175 /* GameModeVC.swift */; };
+		FC52A6921F78435700606175 /* StoreVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC52A6911F78435700606175 /* StoreVC.swift */; };
 		FC57C4F41F6C271300C78C78 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC57C4F31F6C271300C78C78 /* AppDelegate.swift */; };
 		FC57C4F61F6C271300C78C78 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = FC57C4F51F6C271300C78C78 /* GameScene.sks */; };
 		FC57C4F81F6C271300C78C78 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = FC57C4F71F6C271300C78C78 /* Actions.sks */; };
@@ -29,6 +31,8 @@
 		FC52A6881F75528300606175 /* PowerUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PowerUp.swift; sourceTree = "<group>"; };
 		FC52A68A1F75573D00606175 /* BallPU.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BallPU.swift; sourceTree = "<group>"; };
 		FC52A68D1F756E3E00606175 /* GameOverVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverVC.swift; sourceTree = "<group>"; };
+		FC52A68F1F78313B00606175 /* GameModeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameModeVC.swift; sourceTree = "<group>"; };
+		FC52A6911F78435700606175 /* StoreVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreVC.swift; sourceTree = "<group>"; };
 		FC57C4F01F6C271300C78C78 /* BallShooter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BallShooter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC57C4F31F6C271300C78C78 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FC57C4F51F6C271300C78C78 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -91,7 +95,9 @@
 				FC57C4FB1F6C271300C78C78 /* GameViewController.swift */,
 				FC52A68D1F756E3E00606175 /* GameOverVC.swift */,
 				FC52A6861F6F0DC800606175 /* OpenningVC.swift */,
+				FC52A68F1F78313B00606175 /* GameModeVC.swift */,
 				FC57C4FD1F6C271300C78C78 /* Main.storyboard */,
+				FC52A6911F78435700606175 /* StoreVC.swift */,
 				FC57C5021F6C271300C78C78 /* LaunchScreen.storyboard */,
 				FC57C5001F6C271300C78C78 /* Assets.xcassets */,
 				FC57C5051F6C271300C78C78 /* Info.plist */,
@@ -179,8 +185,10 @@
 				FC57C50C1F6C35D200C78C78 /* Ball.swift in Sources */,
 				FC52A6871F6F0DC800606175 /* OpenningVC.swift in Sources */,
 				FC57C4FA1F6C271300C78C78 /* GameScene.swift in Sources */,
+				FC52A6921F78435700606175 /* StoreVC.swift in Sources */,
 				FC57C4FC1F6C271300C78C78 /* GameViewController.swift in Sources */,
 				FC57C4F41F6C271300C78C78 /* AppDelegate.swift in Sources */,
+				FC52A6901F78313B00606175 /* GameModeVC.swift in Sources */,
 				FC52A68B1F75573D00606175 /* BallPU.swift in Sources */,
 				FC52A68E1F756E3E00606175 /* GameOverVC.swift in Sources */,
 			);

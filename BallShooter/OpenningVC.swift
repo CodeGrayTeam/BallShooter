@@ -10,18 +10,18 @@ import UIKit
 
 class OpenningVC: UIViewController {
     
-    @IBOutlet weak var bestLabel: UILabel!
+    @IBAction func gameModes(_ sender: UIButton) {
+        let gameModeVC = self.storyboard?.instantiateViewController(withIdentifier: "gameModeVC") as! GameModeVC
+        self.present(gameModeVC, animated: true, completion: nil)
+    }
     
-    @IBAction func play(_ sender: UIButton) {
-        let gameVC = self.storyboard?.instantiateViewController(withIdentifier: "gameVC") as! GameViewController
-        self.present(gameVC, animated: true, completion: nil)
+    @IBAction func store(_ sender: UIButton) {
+        let storeVC = self.storyboard?.instantiateViewController(withIdentifier: "storeVC") as! StoreVC
+        self.present(storeVC, animated: true, completion: nil)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let defaults = UserDefaults.standard
-        bestLabel.text = "Best: \(defaults.object(forKey: "highscore") as? Int ?? 0)"
     }
     
     override func didReceiveMemoryWarning() {

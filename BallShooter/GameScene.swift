@@ -12,6 +12,7 @@ import GameplayKit
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var viewController: GameViewController!
+    var mode:String!
     
     static var screenHeight:CGFloat!
     static var screenWidth:CGFloat!
@@ -96,7 +97,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         ballX = GameScene.boardPosition.width / 2
         ballY = GameScene.boardPosition.origin.y + 2
         addWalls()
-        addBall()
         addPowerUp()
         addBricks()
         moveObjectsDown()
@@ -117,7 +117,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         //Add highscore label
         let defaults = UserDefaults.standard
-        highscoreLabel = SKLabelNode(text: "Best: \(defaults.object(forKey: "highscore") as? Int ?? 1)")
+        highscoreLabel = SKLabelNode(text: "Best: \(defaults.object(forKey: "\(mode!)HighScore") as? Int ?? 1)")
         highscoreLabel.position = CGPoint(x: 100, y: GameScene.screenHeight - remainderHeight - 15)
         highscoreLabel.fontName = "AmericanTypewriter-Bold"
         highscoreLabel.fontSize = 30
@@ -152,7 +152,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if gameState! == GameState.readyToPlay {
+        if gameState! == GameState.readyToPlay && self.children.contains(launchLine) {
             let x = launchLineX - ballX
             
             let ballLaunchY = ballY + ballRadius
@@ -297,7 +297,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
             placements.append(randomPlacement)
             
-            let brick = Brick(value: score, placement: randomPlacement, size: GameScene.brickSize, categoryBitMask: brickCategory, contactTestBitMask: ballCategory, collisionBitMask: ballCategory)
+            let brick = Brick(value: score, placement: randomPlacement, size: GameScene.brickSize, categoryBitMask: brickCategory, contactTestBitMask: ballCategory, collisionBitMask: ballCategory, mode: mode)
             bricks.append(brick)
             self.addChild(brick.valueLabel)
             self.addChild(brick.brickNode)
@@ -306,7 +306,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func addPowerUp() {
         let randomPlacement = Int(arc4random_uniform(7))
-        let ballPU = BallPU(placement: randomPlacement, categoryBitMask: powerUpCategory, contactTestBitMask: ballCategory, tileSize: GameScene.brickSize)
+        let ballPU = BallPU(placement: randomPlacement, categoryBitMask: powerUpCategory, contactTestBitMask: ballCategory, tileSize: GameScene.brickSize, mode: mode)
         
         powerUps.append(ballPU)
         self.addChild(ballPU.powerUpNode)
@@ -360,6 +360,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.bottom.physicsBody?.categoryBitMask = bottomCategory
         self.bottom.physicsBody?.contactTestBitMask = ballCategory
         self.bottom.physicsBody?.collisionBitMask = ballCategory
+        
+        if mode == "reversed" {
+            self.bottom.strokeColor = SKColor.white
+            self.roof.strokeColor = SKColor.init(red: (244/255), green: (75/255), blue: (66/255), alpha: 1.0)
+        } else {
+            self.bottom.strokeColor = SKColor.init(red: (244/255), green: (75/255), blue: (66/255), alpha: 1.0)
+            self.roof.strokeColor = SKColor.white
+        }
         
         self.addChild(self.roof)
         self.addChild(self.rightWall)
@@ -432,10 +440,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         for i in (0...balls.count - 1).reversed() {
             if balls[i].node == ballNode {
-                if wallNode.physicsBody?.categoryBitMask == roofCategory {
+                if (wallNode.physicsBody?.categoryBitMask == roofCategory && mode != "reversed") || (wallNode.physicsBody?.categoryBitMask == bottomCategory && mode == "reversed") {
                     //The roof is technically like hitting the bottom of a brick
-                    balls[i].changeYDirection(isTop: false)
-                } else if wallNode.physicsBody?.categoryBitMask == bottomCategory {
+                    
+                    if mode == "reversed" {
+                        balls[i].changeYDirection(isTop: true)
+                    } else {
+                        balls[i].changeYDirection(isTop: false)
+                    }
+                } else if (wallNode.physicsBody?.categoryBitMask == bottomCategory && mode != "reversed") || (wallNode.physicsBody?.categoryBitMask == roofCategory && mode == "reversed") {
                     
                     if !firstBallEnded {
                         firstBallEnded = true
@@ -507,26 +520,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         frames = 0
         score += 1
-        addBall()
         addPowerUp()
         addBricks()
         moveObjectsDown()
         
         checkHighScore()
-        
-        //Show the number of balls
-        self.numBallsLabel.position.x = ballX
-        self.numBallsLabel.isHidden = false
-        self.numBalls = maxBallCount
-        
-        //Removes newBallPosition marker
-        self.newPositionMarker.isHidden = true
     }
     
     func checkHighScore() {
         let defaults = UserDefaults.standard
-        if score > defaults.object(forKey: "highscore") as? Int ?? 0 {
-            defaults.set(score, forKey: "highscore")
+        if score > defaults.object(forKey: "\(mode!)HighScore") as? Int ?? 0 {
+            defaults.set(score, forKey: "\(mode!)HighScore")
             highscoreLabel.text = "Best: \(score)"
         }
     }
@@ -559,7 +563,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
         }
         
+        setTimerForNextLevel()
+    }
+    
+    func setTimerForNextLevel() {
+        
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5, execute: {
+            //Show the number of balls
+            self.numBallsLabel.position.x = self.ballX
+            self.numBallsLabel.isHidden = false
+            self.numBalls = self.maxBallCount
+            
+            //Removes newBallPosition marker
+            self.newPositionMarker.isHidden = true
+            self.addBall()
+            
             self.gameState = .checkGameOver
         })
     }

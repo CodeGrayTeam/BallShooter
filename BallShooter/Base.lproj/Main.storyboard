@@ -9,6 +9,177 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Game ModeVC-->
+        <scene sceneID="GWf-Ty-gWl">
+            <objects>
+                <viewController storyboardIdentifier="gameModeVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="A0W-jH-XTZ" customClass="GameModeVC" customModule="BallShooter" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="VmN-kT-pBw"/>
+                        <viewControllerLayoutGuide type="bottom" id="gU2-BD-XIy"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bZ-PG-X7V">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Game Modes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IkR-AN-pQk">
+                                <rect key="frame" x="80.5" y="120" width="213.5" height="40.5"/>
+                                <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="35"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Best: 0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vlj-fi-4DM">
+                                <rect key="frame" x="213.5" y="217.5" width="65.5" height="23.5"/>
+                                <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="20"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mkB-z7-OEx">
+                                <rect key="frame" x="86.5" y="210.5" width="82" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="82" id="hnI-Pt-jHn"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="20"/>
+                                <state key="normal" title="Normal">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="normalGame:" destination="A0W-jH-XTZ" eventType="touchUpInside" id="6JJ-IV-OHQ"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Best: 0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9R0-9l-hwf">
+                                <rect key="frame" x="222.5" y="291" width="65.5" height="23.5"/>
+                                <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="20"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jrp-iV-mxz">
+                                <rect key="frame" x="77.5" y="285" width="100" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="iFo-Y9-Nsp"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="20"/>
+                                <state key="normal" title="Reversed">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="reversedGame:" destination="A0W-jH-XTZ" eventType="touchUpInside" id="EgO-q9-7aF"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Best: 0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pae-sr-Gx6">
+                                <rect key="frame" x="231" y="377.5" width="65.5" height="23.5"/>
+                                <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="20"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bCc-JT-9Aw">
+                                <rect key="frame" x="69" y="371" width="117" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="117" id="nS2-ay-gfs"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="20"/>
+                                <state key="normal" title="Bomb Drop">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="bombDropGame:" destination="A0W-jH-XTZ" eventType="touchUpInside" id="eNB-Ik-cnj"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7sB-QJ-y0L">
+                                <rect key="frame" x="158.5" y="432" width="58" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="58" id="1AP-nD-9nU"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="20"/>
+                                <state key="normal" title="Back">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="back:" destination="A0W-jH-XTZ" eventType="touchUpInside" id="10T-vs-woE"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.4431372549" green="0.44705882349999998" blue="0.6428222656" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="vlj-fi-4DM" firstAttribute="leading" secondItem="mkB-z7-OEx" secondAttribute="trailing" constant="45" id="16T-MP-8Wm"/>
+                            <constraint firstItem="9R0-9l-hwf" firstAttribute="centerY" secondItem="Jrp-iV-mxz" secondAttribute="centerY" id="8B6-rG-Bvi"/>
+                            <constraint firstItem="7sB-QJ-y0L" firstAttribute="centerX" secondItem="8bZ-PG-X7V" secondAttribute="centerX" id="8ni-4U-E74"/>
+                            <constraint firstItem="9R0-9l-hwf" firstAttribute="top" secondItem="vlj-fi-4DM" secondAttribute="bottom" constant="50" id="Cuw-vF-ZEn"/>
+                            <constraint firstItem="bCc-JT-9Aw" firstAttribute="centerX" secondItem="8bZ-PG-X7V" secondAttribute="centerX" constant="-60" id="DOT-Xu-RVT"/>
+                            <constraint firstItem="Jrp-iV-mxz" firstAttribute="centerX" secondItem="8bZ-PG-X7V" secondAttribute="centerX" constant="-60" id="IuU-2x-vz0"/>
+                            <constraint firstItem="pae-sr-Gx6" firstAttribute="centerY" secondItem="bCc-JT-9Aw" secondAttribute="centerY" id="K2u-2W-SAs"/>
+                            <constraint firstItem="pae-sr-Gx6" firstAttribute="leading" secondItem="bCc-JT-9Aw" secondAttribute="trailing" constant="45" id="LHu-xP-p4G"/>
+                            <constraint firstItem="IkR-AN-pQk" firstAttribute="top" secondItem="VmN-kT-pBw" secondAttribute="bottom" constant="100" id="V31-fN-5fE"/>
+                            <constraint firstItem="IkR-AN-pQk" firstAttribute="centerX" secondItem="8bZ-PG-X7V" secondAttribute="centerX" id="eDO-Dp-Ax7"/>
+                            <constraint firstItem="7sB-QJ-y0L" firstAttribute="top" secondItem="bCc-JT-9Aw" secondAttribute="bottom" constant="25" id="gpg-6a-y7J"/>
+                            <constraint firstItem="vlj-fi-4DM" firstAttribute="centerY" secondItem="mkB-z7-OEx" secondAttribute="centerY" id="jVY-MN-m85"/>
+                            <constraint firstItem="mkB-z7-OEx" firstAttribute="centerX" secondItem="8bZ-PG-X7V" secondAttribute="centerX" constant="-60" id="rfB-b7-gbi"/>
+                            <constraint firstItem="bCc-JT-9Aw" firstAttribute="top" secondItem="Jrp-iV-mxz" secondAttribute="bottom" constant="50" id="sCU-OT-eCO"/>
+                            <constraint firstItem="mkB-z7-OEx" firstAttribute="top" secondItem="IkR-AN-pQk" secondAttribute="bottom" constant="50" id="u9M-ON-7PQ"/>
+                            <constraint firstItem="9R0-9l-hwf" firstAttribute="leading" secondItem="Jrp-iV-mxz" secondAttribute="trailing" constant="45" id="vxe-7P-Naz"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="backButton" destination="7sB-QJ-y0L" id="c51-Pg-V0r"/>
+                        <outlet property="bombDropButton" destination="bCc-JT-9Aw" id="SRj-hf-QvW"/>
+                        <outlet property="bombDropHighScore" destination="pae-sr-Gx6" id="ZAF-mh-DY4"/>
+                        <outlet property="normalButton" destination="mkB-z7-OEx" id="YG7-eB-h6H"/>
+                        <outlet property="normalHighScore" destination="vlj-fi-4DM" id="K6X-cl-TYH"/>
+                        <outlet property="reversedButton" destination="Jrp-iV-mxz" id="jMQ-nj-tJ2"/>
+                        <outlet property="reversedHighScore" destination="9R0-9l-hwf" id="4Pk-Lj-JlG"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SGq-a7-xPX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-337" y="55"/>
+        </scene>
+        <!--StoreVC-->
+        <scene sceneID="O9w-NM-RsS">
+            <objects>
+                <viewController storyboardIdentifier="storeVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="OsL-3W-joH" customClass="StoreVC" customModule="BallShooter" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="uu8-hL-fXl"/>
+                        <viewControllerLayoutGuide type="bottom" id="fh2-4R-4Za"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="0zD-7x-A1t">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oGY-Cf-aWD">
+                                <rect key="frame" x="158.5" y="235.5" width="58" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="58" id="hx0-vu-iOq"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="20"/>
+                                <state key="normal" title="Back">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="back:" destination="OsL-3W-joH" eventType="touchUpInside" id="68k-5o-KCb"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Store" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YR3-va-LFa">
+                                <rect key="frame" x="142.5" y="120" width="90.5" height="40.5"/>
+                                <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="35"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.4431372549" green="0.44705882349999998" blue="0.6428222656" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="YR3-va-LFa" firstAttribute="top" secondItem="uu8-hL-fXl" secondAttribute="bottom" constant="100" id="Md9-SG-4xw"/>
+                            <constraint firstItem="oGY-Cf-aWD" firstAttribute="centerX" secondItem="0zD-7x-A1t" secondAttribute="centerX" id="OiF-HX-lah"/>
+                            <constraint firstItem="YR3-va-LFa" firstAttribute="centerX" secondItem="0zD-7x-A1t" secondAttribute="centerX" id="W77-r6-wGd"/>
+                            <constraint firstItem="oGY-Cf-aWD" firstAttribute="top" secondItem="YR3-va-LFa" secondAttribute="bottom" constant="75" id="x4w-kD-jpU"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="backButton" destination="oGY-Cf-aWD" id="7NM-9H-F4q"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Hlc-0L-6jx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="410" y="54"/>
+        </scene>
         <!--OpenningVC-->
         <scene sceneID="rF6-gH-xc0">
             <objects>
@@ -22,33 +193,42 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tzn-Wf-Bfa">
-                                <rect key="frame" x="155.5" y="328" width="63" height="47"/>
+                                <rect key="frame" x="95.5" y="241.5" width="183" height="47"/>
                                 <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="30"/>
-                                <state key="normal" title="Play">
+                                <state key="normal" title="Game Modes">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="play:" destination="WeF-52-GH0" eventType="touchUpInside" id="xL5-gx-Km4"/>
+                                    <action selector="gameModes:" destination="WeF-52-GH0" eventType="touchUpInside" id="Bw7-No-P4J"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Best: 0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zEA-xQ-sBC">
-                                <rect key="frame" x="105" y="170" width="164" height="58"/>
-                                <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="50"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ballz" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zEA-xQ-sBC">
+                                <rect key="frame" x="139.5" y="120" width="96.5" height="46.5"/>
+                                <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="40"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1eU-xi-wT9">
+                                <rect key="frame" x="148.5" y="338.5" width="78" height="47"/>
+                                <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="30"/>
+                                <state key="normal" title="Store">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="store:" destination="WeF-52-GH0" eventType="touchUpInside" id="RSO-mL-uNU"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.4431372549" green="0.44705882349999998" blue="0.6428222656" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="1eU-xi-wT9" firstAttribute="centerX" secondItem="Ndt-FF-GRF" secondAttribute="centerX" id="28d-8C-Rjt"/>
                             <constraint firstItem="tzn-Wf-Bfa" firstAttribute="centerX" secondItem="Ndt-FF-GRF" secondAttribute="centerX" id="2dU-Rk-naJ"/>
+                            <constraint firstItem="1eU-xi-wT9" firstAttribute="top" secondItem="tzn-Wf-Bfa" secondAttribute="bottom" constant="50" id="HrU-DA-bru"/>
                             <constraint firstItem="zEA-xQ-sBC" firstAttribute="centerX" secondItem="Ndt-FF-GRF" secondAttribute="centerX" id="ORq-EP-4BS"/>
-                            <constraint firstItem="zEA-xQ-sBC" firstAttribute="top" secondItem="Kg7-Xx-i2L" secondAttribute="bottom" constant="150" id="iHJ-7U-Nhh"/>
-                            <constraint firstItem="tzn-Wf-Bfa" firstAttribute="top" secondItem="zEA-xQ-sBC" secondAttribute="bottom" constant="100" id="l9w-8T-gmB"/>
+                            <constraint firstItem="zEA-xQ-sBC" firstAttribute="top" secondItem="Kg7-Xx-i2L" secondAttribute="bottom" constant="100" id="iHJ-7U-Nhh"/>
+                            <constraint firstItem="tzn-Wf-Bfa" firstAttribute="top" secondItem="zEA-xQ-sBC" secondAttribute="bottom" constant="75" id="l9w-8T-gmB"/>
                         </constraints>
                     </view>
-                    <connections>
-                        <outlet property="bestLabel" destination="zEA-xQ-sBC" id="odM-tg-oTs"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xkK-91-o2C" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -130,7 +310,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-306" y="57"/>
+            <point key="canvasLocation" x="-1052" y="-631"/>
         </scene>
     </scenes>
 </document>

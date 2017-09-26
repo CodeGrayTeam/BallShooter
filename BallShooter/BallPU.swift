@@ -12,8 +12,8 @@ class BallPU: PowerUp {
     
     var grow:Bool!
     
-    init(placement: Int, categoryBitMask: UInt32, contactTestBitMask: UInt32, tileSize:CGFloat) {
-        super.init(type: .Ball, placement: placement, categoryBitMask: categoryBitMask, contactTestBitMask: contactTestBitMask, tileSize: tileSize)
+    init(placement: Int, categoryBitMask: UInt32, contactTestBitMask: UInt32, tileSize:CGFloat, mode: String) {
+        super.init(type: .Ball, placement: placement, categoryBitMask: categoryBitMask, contactTestBitMask: contactTestBitMask, tileSize: tileSize, mode: mode)
         
         self.size -= 5
         self.grow = true
