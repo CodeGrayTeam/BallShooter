@@ -41,12 +41,12 @@ class BallPU: PowerUp {
     //Grow and shrink powerUp
     func oscillate() {
         if self.grow {
-            self.powerUpNode.run((SKAction.scale(by: 1.25, duration: 0.5)), completion: { _ in
+            self.powerUpNode.run((SKAction.scale(by: 1.25, duration: 0.5)), completion: { 
                 self.grow = false
                 self.oscillate()
             })
         } else {
-            self.powerUpNode.run((SKAction.scale(by: (self.size / (self.powerUpNode.xScale * self.size)), duration: 0.5)), completion: { _ in
+            self.powerUpNode.run((SKAction.scale(by: (self.size / (self.powerUpNode.xScale * self.size)), duration: 0.5)), completion: { 
                 self.grow = true
                 self.oscillate()
             })

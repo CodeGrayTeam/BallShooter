@@ -270,37 +270,48 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func addBricks() {
-        var maxNumberOfBlocks = ceil(Double(score) / 2.0 * 0.1 + 1.0)
         
-        if maxNumberOfBlocks > 7 {
-            maxNumberOfBlocks = 7
-        }
-        
-        var scoreScale = Int(floor(Double(score) * 0.025))
-        
-        if scoreScale > 4 {
-            scoreScale = 4
-        }
-        
-        var numberOfBlocks = Int(arc4random_uniform(UInt32(maxNumberOfBlocks))) + 2 + scoreScale
-        
-        if numberOfBlocks > 7 {
-            numberOfBlocks = 7
-        }
-        var placements = [Int]()
-        
-        for _ in 0...numberOfBlocks - 1 {
-            
-            var randomPlacement = Int(arc4random_uniform(7))
-            while placements.contains(randomPlacement) {
-                randomPlacement = Int(arc4random_uniform(7))
-            }
-            placements.append(randomPlacement)
-            
-            let brick = Brick(value: score, placement: randomPlacement, size: GameScene.brickSize, categoryBitMask: brickCategory, contactTestBitMask: ballCategory, collisionBitMask: ballCategory, mode: mode)
+        if mode == "bombDrop" && score % 2 != 0 {
+            let randomPlacement = Int(arc4random_uniform(7))
+            let brickValue = score * (3 + (score / 30))
+            let brick = Brick(value: brickValue, placement: randomPlacement, size: GameScene.brickSize, categoryBitMask: brickCategory, contactTestBitMask: ballCategory, collisionBitMask: ballCategory, mode: mode)
             bricks.append(brick)
             self.addChild(brick.valueLabel)
             self.addChild(brick.brickNode)
+        } else if mode != "bombDrop" {
+            var maxNumberOfBlocks = ceil(Double(score) / 2.0 * 0.1 + 1.0)
+            
+            if maxNumberOfBlocks > 7 {
+                maxNumberOfBlocks = 7
+            }
+            
+            var scoreScale = Int(floor(Double(score) * 0.025))
+            
+            if scoreScale > 4 {
+                scoreScale = 4
+            }
+            
+            var numberOfBlocks = Int(arc4random_uniform(UInt32(maxNumberOfBlocks))) + 2 + scoreScale
+            
+            if numberOfBlocks > 7 {
+                numberOfBlocks = 7
+            }
+            
+            var placements = [Int]()
+            
+            for _ in 0...numberOfBlocks - 1 {
+                
+                var randomPlacement = Int(arc4random_uniform(7))
+                while placements.contains(randomPlacement) {
+                    randomPlacement = Int(arc4random_uniform(7))
+                }
+                placements.append(randomPlacement)
+                
+                let brick = Brick(value: score, placement: randomPlacement, size: GameScene.brickSize, categoryBitMask: brickCategory, contactTestBitMask: ballCategory, collisionBitMask: ballCategory, mode: mode)
+                bricks.append(brick)
+                self.addChild(brick.valueLabel)
+                self.addChild(brick.brickNode)
+            }
         }
     }
     
