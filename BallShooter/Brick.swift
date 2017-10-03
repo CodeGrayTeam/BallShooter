@@ -73,7 +73,11 @@ class Brick {
     }
     
     func changeColour() {
-        let temp:CGFloat = CGFloat(self.value) * 10.0 / 256.0
+        var temp:CGFloat = CGFloat(self.value) * 10.0 / 256.0
+        
+        if mode == "bombDrop" {
+            temp = temp / 5
+        }
         
         let green:CGFloat = 1.0 - min(temp, 1.0)
         let blue:CGFloat = max(0, min(temp, 1.0))

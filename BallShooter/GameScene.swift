@@ -273,7 +273,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         if mode == "bombDrop" && score % 2 != 0 {
             let randomPlacement = Int(arc4random_uniform(7))
-            let brickValue = score * (3 + (score / 30))
+            let brickValue = score * (3 + (score / 25))
             let brick = Brick(value: brickValue, placement: randomPlacement, size: GameScene.brickSize, categoryBitMask: brickCategory, contactTestBitMask: ballCategory, collisionBitMask: ballCategory, mode: mode)
             bricks.append(brick)
             self.addChild(brick.valueLabel)
