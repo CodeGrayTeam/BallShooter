@@ -20,6 +20,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     static var boardPosition:CGRect!
     var frames:Int!
     
+    var starCountLabel:SKLabelNode!
+    var starLabel:SKSpriteNode!
     var highscoreLabel:SKLabelNode!
     var scoreLabel:SKLabelNode!
     var score:Int = 0 {
@@ -123,6 +125,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         highscoreLabel.fontSize = 30
         highscoreLabel.fontColor = UIColor.white
         self.addChild(highscoreLabel)
+        
+        //Add stars label
+        starCountLabel = SKLabelNode(text: "\(defaults.object(forKey: "stars") as? Int ?? 0)")
+        starCountLabel.position = CGPoint(x: GameScene.screenWidth - 80, y: GameScene.screenHeight - remainderHeight - 15)
+        starCountLabel.fontName = "AmericanTypewriter-Bold"
+        starCountLabel.fontSize = 30
+        starCountLabel.fontColor = UIColor.white
+        self.addChild(starCountLabel)
+        
+        starLabel = SKSpriteNode(imageNamed: "star.png")
+        starLabel.position = CGPoint(x: GameScene.screenWidth - 130, y: GameScene.screenHeight - remainderHeight)
+        self.addChild(starLabel)
         
         //Add score label
         scoreLabel = SKLabelNode(text: "0")
@@ -321,6 +335,25 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         powerUps.append(ballPU)
         self.addChild(ballPU.powerUpNode)
+        
+        //1 in 7 chance for star to spawn
+        let isStar = Int(arc4random_uniform(7))
+        if isStar == 3 {
+            var starPlacement = randomPlacement
+            while starPlacement == randomPlacement {
+                starPlacement = Int(arc4random_uniform(7))
+            }
+            let starPU = StarPU(placement: starPlacement, categoryBitMask: powerUpCategory, contactTestBitMask: ballCategory, tileSize: GameScene.brickSize, mode: mode)
+            powerUps.append(starPU)
+            self.addChild(starPU.powerUpNode)
+        }
+    }
+    
+    func givePlayerStar() {
+        let defaults = UserDefaults.standard
+        let stars = defaults.object(forKey: "stars") as? Int ?? 0
+        defaults.set(stars + 1, forKey: "stars")
+        starCountLabel.text = "\(stars + 1)"
     }
     
     func addBall() {
@@ -412,7 +445,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 } else if (secondBody.categoryBitMask & roofCategory) != 0 || (secondBody.categoryBitMask & rightWallCategory) != 0 || (secondBody.categoryBitMask & leftWallCategory) != 0 || (secondBody.categoryBitMask & bottomCategory) != 0 {
                     ballDidHitWall(ballNode: firstBody.node as! SKShapeNode, wallNode: secondBody.node as! SKShapeNode)
                 } else if (secondBody.categoryBitMask & powerUpCategory) != 0 {
-                    ballDidHitPowerUp(ballNode: firstBody.node as! SKShapeNode, powerUpNode: secondBody.node as! SKShapeNode)
+                    ballDidHitPowerUp(ballNode: firstBody.node as! SKShapeNode, powerUpNode: secondBody.node!)
                 } else {
                     //Nothing as of yet
                 }
@@ -486,7 +519,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
-    func ballDidHitPowerUp(ballNode:SKShapeNode, powerUpNode:SKShapeNode) {
+    func ballDidHitPowerUp(ballNode:SKShapeNode, powerUpNode:SKNode) {
         var powerUp:PowerUp!
         var index = 0
         for pU in powerUps {
@@ -506,7 +539,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 powerUps.remove(at: index)
                 break
             case .Star:
-                //No stars yet
+                print("Hit star")
+                givePlayerStar()
+                powerUp.removeFromScreen()
+                powerUps.remove(at: index)
                 break
             }
         } else {
@@ -534,6 +570,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addPowerUp()
         addBricks()
         moveObjectsDown()
+        
+        //Gives player a star if score is % 10
+        if score % 10 == 0 {
+            givePlayerStar()
+        }
         
         checkHighScore()
     }

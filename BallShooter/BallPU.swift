@@ -22,20 +22,22 @@ class BallPU: PowerUp {
     }
     
     func createNode() {
-        self.powerUpNode = SKShapeNode(circleOfRadius: self.size/2)
-        self.powerUpNode.fillColor = SKColor.orange
-        self.powerUpNode.strokeColor = SKColor.orange
+        let tempNode = SKShapeNode(circleOfRadius: self.size/2)
+        tempNode.fillColor = SKColor.orange
+        tempNode.strokeColor = SKColor.orange
         
-        self.powerUpNode.position.x = xPosition
-        self.powerUpNode.position.y = yPosition
+        tempNode.position.x = xPosition
+        tempNode.position.y = yPosition
         
-        self.powerUpNode.physicsBody = SKPhysicsBody(circleOfRadius: self.size/2)
+        tempNode.physicsBody = SKPhysicsBody(circleOfRadius: self.size/2)
         
-        self.powerUpNode.physicsBody?.isDynamic = true
-        self.powerUpNode.physicsBody?.categoryBitMask = categoryBitMask
-        self.powerUpNode.physicsBody?.contactTestBitMask = contactTestBitMask
-        self.powerUpNode.physicsBody?.collisionBitMask = 0
-        self.powerUpNode.position = CGPoint(x: xPosition, y: yPosition)
+        tempNode.physicsBody?.isDynamic = true
+        tempNode.physicsBody?.categoryBitMask = categoryBitMask
+        tempNode.physicsBody?.contactTestBitMask = contactTestBitMask
+        tempNode.physicsBody?.collisionBitMask = 0
+        tempNode.position = CGPoint(x: xPosition, y: yPosition)
+        
+        self.powerUpNode = tempNode
     }
     
     //Grow and shrink powerUp

@@ -22,7 +22,7 @@ class PowerUp {
     
     var contactTestBitMask:UInt32!
     var categoryBitMask:UInt32!
-    var powerUpNode:SKShapeNode!
+    var powerUpNode:SKNode!
     
     enum PowerUpType {
         case Ball, Star
