@@ -17,7 +17,7 @@ class Ball {
     
     var radius:CGFloat!
     
-    var xSpeed:CGFloat!
+    var xSpeed:CGFloat! 
     var ySpeed:CGFloat!
     var speed:CGFloat!
     

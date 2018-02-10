@@ -88,24 +88,64 @@
 		FC57C4F21F6C271300C78C78 /* BallShooter */ = {
 			isa = PBXGroup;
 			children = (
-				FC57C4F31F6C271300C78C78 /* AppDelegate.swift */,
+				FCD6F01F202EA48700FC31F6 /* Actions */,
+				FCD6F01E202EA44900FC31F6 /* Application */,
+				FCD6F01C202EA3F500FC31F6 /* GameScene */,
+				FCD6F020202EA49700FC31F6 /* Objects */,
+				FCD6F01D202EA43200FC31F6 /* UI */,
+			);
+			path = BallShooter;
+			sourceTree = "<group>";
+		};
+		FCD6F01C202EA3F500FC31F6 /* GameScene */ = {
+			isa = PBXGroup;
+			children = (
 				FC57C4F51F6C271300C78C78 /* GameScene.sks */,
-				FC57C4F71F6C271300C78C78 /* Actions.sks */,
 				FC57C4F91F6C271300C78C78 /* GameScene.swift */,
-				FC52A68C1F75574300606175 /* PowerUps */,
-				FC57C50B1F6C35D200C78C78 /* Ball.swift */,
-				FC52A6841F6CEAAE00606175 /* Brick.swift */,
+			);
+			name = GameScene;
+			sourceTree = "<group>";
+		};
+		FCD6F01D202EA43200FC31F6 /* UI */ = {
+			isa = PBXGroup;
+			children = (
 				FC57C4FB1F6C271300C78C78 /* GameViewController.swift */,
 				FC52A68D1F756E3E00606175 /* GameOverVC.swift */,
 				FC52A6861F6F0DC800606175 /* OpenningVC.swift */,
 				FC52A68F1F78313B00606175 /* GameModeVC.swift */,
 				FC57C4FD1F6C271300C78C78 /* Main.storyboard */,
 				FC52A6911F78435700606175 /* StoreVC.swift */,
+			);
+			name = UI;
+			sourceTree = "<group>";
+		};
+		FCD6F01E202EA44900FC31F6 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				FC57C4F31F6C271300C78C78 /* AppDelegate.swift */,
 				FC57C5021F6C271300C78C78 /* LaunchScreen.storyboard */,
 				FC57C5001F6C271300C78C78 /* Assets.xcassets */,
 				FC57C5051F6C271300C78C78 /* Info.plist */,
 			);
-			path = BallShooter;
+			name = Application;
+			sourceTree = "<group>";
+		};
+		FCD6F01F202EA48700FC31F6 /* Actions */ = {
+			isa = PBXGroup;
+			children = (
+				FC57C4F71F6C271300C78C78 /* Actions.sks */,
+			);
+			name = Actions;
+			sourceTree = "<group>";
+		};
+		FCD6F020202EA49700FC31F6 /* Objects */ = {
+			isa = PBXGroup;
+			children = (
+				FC52A68C1F75574300606175 /* PowerUps */,
+				FC57C50B1F6C35D200C78C78 /* Ball.swift */,
+				FC52A6841F6CEAAE00606175 /* Brick.swift */,
+			);
+			name = Objects;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
