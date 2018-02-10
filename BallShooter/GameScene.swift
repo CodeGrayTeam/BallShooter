@@ -80,8 +80,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var gameOver:Bool!
     
     override func didMove(to view: SKView) {
-        self.physicsWorld.gravity = CGVector(dx: 0, dy: 0)
-        self.physicsWorld.contactDelegate = self
+        physicsWorld.contactDelegate = self
     
         gameState = .startUp
         ballCount = 0
