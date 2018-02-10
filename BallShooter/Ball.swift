@@ -22,6 +22,7 @@ class Ball {
     var speed:CGFloat!
     
     var rotation:CGFloat!
+    var increaseY:Bool = false
     
     var node:SKNode!
     
@@ -30,13 +31,13 @@ class Ball {
         self.image = image
         self.fillColour = fillColour
         self.borderColour = borderColour
-        self.speed = speed * 50
+        self.speed = speed
         self.rotation = rotation
         
         if image == "" {
-            let tempNode = SKShapeNode(circleOfRadius: self.radius)
-            tempNode.fillColor = self.fillColour
-            tempNode.strokeColor = self.borderColour
+            let tempNode = SKShapeNode(circleOfRadius: radius)
+            tempNode.fillColor = fillColour
+            tempNode.strokeColor = borderColour
             tempNode.position.x = xPosition
             tempNode.position.y = yPosition
             node = tempNode
@@ -46,164 +47,41 @@ class Ball {
             node = SKSpriteNode(imageNamed: self.image)
             node.physicsBody = SKPhysicsBody(circleOfRadius: node.frame.height / 2)
         }
+        node.position = CGPoint(x: xPosition, y: yPosition)
         
-        node.physicsBody?.isDynamic = true
         node.physicsBody?.usesPreciseCollisionDetection = true
         node.physicsBody?.categoryBitMask = categoryBitMask
         node.physicsBody?.contactTestBitMask = contactTestBitMask
         node.physicsBody?.collisionBitMask = collisionBitMask
-        node.physicsBody?.affectedByGravity = false
         node.physicsBody?.friction = 0
-        node.physicsBody?.mass = 10
         node.physicsBody?.linearDamping = 0
-        node.position = CGPoint(x: xPosition, y: yPosition)
-        
-        calculateSpeeds()
+        node.physicsBody?.angularDamping = 0
+        node.physicsBody?.restitution = 1
+        node.physicsBody?.mass = 0.009
+        node.physicsBody?.allowsRotation = false
     }
     
-    func calculateSpeeds() {
-        self.xSpeed = cos(self.rotation) * self.speed
-        self.ySpeed = sin(self.rotation) * self.speed
+    func launchBall() {
+        xSpeed = cos(rotation) * speed
+        ySpeed = sin(rotation) * speed
+        node.physicsBody?.applyImpulse(CGVector(dx: xSpeed, dy: ySpeed))
     }
     
-    func moveBall() {
-        self.node.physicsBody?.velocity = CGVector(dx: self.xSpeed, dy: self.ySpeed)
-    }
-    
-    func changeDirection(brick: Brick, contact: SKPhysicsContact) {
-
-        let brickLeftX = brick.xPosition!
-        let brickRightX = brick.xPosition! + brick.size!
-        let brickTopY = brick.yPosition! + brick.size!
-        let brickBottomY = brick.yPosition!
-        let contactX = contact.contactPoint.x
-        let contactY = contact.contactPoint.y
-        
-        print("BRICK: \(brick.brickNode.name ?? "No name"), T: \(brickTopY), B: \(brickBottomY), L: \(brickLeftX), R: \(brickRightX)")
-        print("Contact point: \(contactX), \(contactY)")
-        
-        
-        if contactY < brickBottomY {
-            if contactX > brickLeftX + 0.1 && contactX < brickRightX - 0.1 {
-                print("Should be bottom")
-                self.changeYDirection(isTop: false)
-            } else if contactX <= brickLeftX + 0.1 {
-                print("Hit bottom left corner!")
-                changeRotation(corner: "BL")
-            } else if contactX >= brickRightX - 0.1 {
-                print("Hit bottom right corner!")
-                changeRotation(corner: "BR")
+    func updateYSpeedIfTooSmall() {
+        if let dy = node.physicsBody?.velocity.dy {
+            if (dy < 0.5 && dy > 0) || (dy == 0 && !increaseY) {
+                let impulseY = -0.5 + dy
+                print("Was: \(dy), Impulse: \(impulseY)")
+                node.physicsBody?.applyImpulse(CGVector(dx: 0, dy: impulseY))
+            } else if (dy > -0.5 && dy < 0) || (dy == 0 && increaseY) {
+                let impulseY = 0.5 - dy
+                print("Was: \(dy), Impulse: \(impulseY)")
+                node.physicsBody?.applyImpulse(CGVector(dx: 0, dy: impulseY))
             }
-        } else if contactY > brickTopY {
-            if contactX > brickLeftX + 0.1 && contactX < brickRightX - 0.1 {
-                print("Should be top")
-                self.changeYDirection(isTop: true)
-            } else if contactX <= brickLeftX + 0.1 {
-                print("Hit top left corner!")
-                changeRotation(corner: "TL")
-            } else if contactX >= brickRightX - 0.1 {
-                print("Hit top right corner!")
-                changeRotation(corner: "TR")
-            }
-        } else if contactX < brickLeftX {
-            if contactY > brickBottomY + 0.1 && contactY < brickTopY - 0.1 {
-                print("Should be left")
-                self.changeXDirection(isRight: false)
-            } else if contactY <= brickBottomY + 0.1 {
-                print("Hit bottom left corner!")
-                changeRotation(corner: "BL")
-            } else if contactY >= brickTopY - 0.1 {
-                print("Hit top left corner!")
-                changeRotation(corner: "TL")
-            }
-        } else if contactX > brickRightX {
-            if contactY > brickBottomY + 0.1 && contactY < brickTopY - 0.1 {
-                print("Should be right")
-                self.changeXDirection(isRight: true)
-            } else if contactY <= brickBottomY + 0.1 {
-                print("Hit bottom right corner!")
-                changeRotation(corner: "BR")
-            } else if contactY >= brickTopY - 0.1 {
-                print("Hit top right corner!")
-                changeRotation(corner: "TR")
-            }
-        } else {
-            print("Hit a bad corner!")
-        }
-        
-        
-    }
-    
-    //Corner can be one of the following: TL, TR, BT, BR (meaning top left, ...)
-    func changeRotation(corner: String) {
-        
-        let twoPi:CGFloat = 2.0 * CGFloat.pi
-        
-        let absRotation:CGFloat =  (rotation + twoPi).truncatingRemainder(dividingBy: twoPi)
-        
-        switch corner {
-        case "TL":
-            if absRotation == (twoPi - (CGFloat.pi * 0.25)) {
-                rotation! += CGFloat.pi
-                calculateSpeeds()
-            } else if absRotation > (twoPi - (CGFloat.pi * 0.25)) || absRotation <= (CGFloat.pi * 0.50) {
-                changeXDirection(isRight: false)
-            } else {
-                changeYDirection(isTop: true)
-            }
-            break
-        case "TR":
-            if absRotation == (twoPi - (CGFloat.pi * 0.75)) {
-                rotation! += CGFloat.pi
-                calculateSpeeds()
-            } else if absRotation > (twoPi - (CGFloat.pi * 0.75)) {
-                changeYDirection(isTop: true)
-            } else {
-                changeXDirection(isRight: true)
-            }
-            break
-        case "BL":
-            if absRotation == (CGFloat.pi * 0.25) {
-                rotation! += CGFloat.pi
-                calculateSpeeds()
-            } else if absRotation > (CGFloat.pi * 0.25) &&  absRotation <= CGFloat.pi {
-                changeYDirection(isTop: false)
-            } else {
-                changeXDirection(isRight: true)
-            }
-            break
-        case "BR":
-            if absRotation == (CGFloat.pi * 0.75) {
-                rotation! += CGFloat.pi
-                calculateSpeeds()
-            } else if absRotation > (CGFloat.pi * 0.75) {
-                changeXDirection(isRight: true)
-            } else {
-                changeYDirection(isTop: false)
-            }
-            break
-        default:
-            print("Shouldn't be in here!")
-            break
-        }
-    }
-    
-    func changeYDirection(isTop: Bool) {
-        if (isTop == true && ySpeed < 0) || (isTop == false && ySpeed > 0) {
-            self.ySpeed! *= -1
-            rotation! *= -1
-        }
-    }
-    
-    func changeXDirection(isRight: Bool) {
-        if (isRight == true && xSpeed < 0) || (isRight == false && xSpeed > 0) {
-            self.xSpeed! *= -1
             
-            rotation = acos(self.xSpeed! / self.speed)
-            if ySpeed! < 0 {
-                rotation! *= -1
+            if dy == 0 {
+                increaseY = !increaseY
             }
         }
     }
-    
 }
