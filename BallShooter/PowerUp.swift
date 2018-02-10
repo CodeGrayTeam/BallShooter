@@ -28,38 +28,37 @@ class PowerUp {
         case Ball, Star
     }
     
-    init(type: PowerUpType, placement: Int, categoryBitMask: UInt32, contactTestBitMask: UInt32, tileSize:CGFloat, mode: String) {
+    init(type: PowerUpType, placement: Int, categoryBitMask: UInt32, tileSize:CGFloat, mode: String) {
         self.mode = mode
-        self.xPosition = (tileSize * CGFloat(placement)) + (tileSize / 2)
+        xPosition = (tileSize * CGFloat(placement)) + (tileSize / 2)
         
-        if self.mode == "reversed" {
-            self.yPosition = GameScene.boardPosition.origin.y + (tileSize / 2)
+        if mode == "reversed" {
+            yPosition = GameScene.boardPosition.origin.y + (tileSize / 2)
         } else {
-            self.yPosition = GameScene.boardPosition.height + GameScene.boardPosition.origin.y - (tileSize / 2)
+            yPosition = GameScene.boardPosition.height + GameScene.boardPosition.origin.y - (tileSize / 2)
         }
         
         self.placement = placement
         self.tileSize = tileSize
-        self.contactTestBitMask = contactTestBitMask
         self.categoryBitMask = categoryBitMask
         self.type = type
-        self.row = 0
+        row = 0
     }
     
     //Function for moving down the powerup. Returns boolean for if its still on the board
     func moveDown() -> Bool {
-        self.row! += 1
+        row! += 1
         var action:SKAction!
         
-        if self.mode == "reversed" {
-            self.yPosition! += self.tileSize
-            action = SKAction.moveBy(x: 0, y: self.tileSize, duration: 0.5)
+        if mode == "reversed" {
+            yPosition! += tileSize
+            action = SKAction.moveBy(x: 0, y: tileSize, duration: 0.5)
         } else  {
-            self.yPosition! -= self.tileSize
-            action = SKAction.moveBy(x: 0, y: -(self.tileSize), duration: 0.5)
+            yPosition! -= tileSize
+            action = SKAction.moveBy(x: 0, y: -(tileSize), duration: 0.5)
         }
         
-        self.powerUpNode.run(action)
+        powerUpNode.run(action)
         
         if row == 9 {
             removeFromScreen()
@@ -70,6 +69,6 @@ class PowerUp {
     
     //Removes node from screen
     func removeFromScreen() {
-        self.powerUpNode.removeFromParent()
+        powerUpNode.removeFromParent()
     }
 }

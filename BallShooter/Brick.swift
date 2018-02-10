@@ -33,7 +33,7 @@ class Brick {
     
     var brickNode:SKShapeNode!
     
-    init(value: Int, placement: Int, size: CGFloat, categoryBitMask: UInt32, contactTestBitMask: UInt32, collisionBitMask: UInt32, mode: String) {
+    init(value: Int, placement: Int, size: CGFloat, categoryBitMask: UInt32, mode: String) {
         self.mode = mode
         self.xPosition = (size * CGFloat(placement)) + brickGap
         
@@ -49,27 +49,28 @@ class Brick {
         self.value = value
         self.row = 0
         
-        createNodes(categoryBitMask: categoryBitMask, contactTestBitMask: contactTestBitMask, collisionBitMask: collisionBitMask)
+        createNodes(categoryBitMask: categoryBitMask)
         changeColour()
     }
     
-    func createNodes(categoryBitMask: UInt32, contactTestBitMask: UInt32, collisionBitMask: UInt32) {
+    func createNodes(categoryBitMask: UInt32) {
         valueLabel = SKLabelNode(text: "\(value)")
-        valueLabel.position = CGPoint(x: self.xPosition + (size / 2), y: self.yPosition + (size / 2) - 15)
+        valueLabel.position = CGPoint(x: xPosition + (size / 2), y: yPosition + (size / 2) - 15)
         valueLabel.fontName = "AmericanTypewriter-Bold"
         valueLabel.fontSize = 30
         valueLabel.fontColor = UIColor.black
         valueLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.center
         
-        let rect = CGRect(x: self.xPosition, y: self.yPosition, width: self.size, height: self.size)
+        let rect = CGRect(x: xPosition, y: yPosition, width: size, height: size)
         
-        self.brickNode = SKShapeNode(rect: rect, cornerRadius: 1)
-        self.brickNode.physicsBody = SKPhysicsBody(edgeLoopFrom: rect)
-        self.brickNode.physicsBody?.isDynamic = true
-        self.brickNode.physicsBody?.categoryBitMask = categoryBitMask
-        self.brickNode.physicsBody?.contactTestBitMask = contactTestBitMask
-        self.brickNode.physicsBody?.collisionBitMask = collisionBitMask
-        self.brickNode.name = "\(value) \(placement!)"
+        brickNode = SKShapeNode(rect: rect, cornerRadius: 1)
+        brickNode.physicsBody = SKPhysicsBody(edgeLoopFrom: rect)
+        brickNode.physicsBody?.categoryBitMask = categoryBitMask
+        brickNode.physicsBody?.allowsRotation = false
+        brickNode.physicsBody?.friction = 0.0
+        brickNode.physicsBody?.affectedByGravity = false
+        brickNode.physicsBody?.isDynamic = false
+        brickNode.name = "\(value) \(placement!)"
     }
     
     func changeColour() {

@@ -90,20 +90,20 @@
 			children = (
 				FCD6F01F202EA48700FC31F6 /* Actions */,
 				FCD6F01E202EA44900FC31F6 /* Application */,
-				FCD6F01C202EA3F500FC31F6 /* GameScene */,
 				FCD6F020202EA49700FC31F6 /* Objects */,
+				FCD6F01C202EA3F500FC31F6 /* Scenes */,
 				FCD6F01D202EA43200FC31F6 /* UI */,
 			);
 			path = BallShooter;
 			sourceTree = "<group>";
 		};
-		FCD6F01C202EA3F500FC31F6 /* GameScene */ = {
+		FCD6F01C202EA3F500FC31F6 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
 				FC57C4F51F6C271300C78C78 /* GameScene.sks */,
 				FC57C4F91F6C271300C78C78 /* GameScene.swift */,
 			);
-			name = GameScene;
+			name = Scenes;
 			sourceTree = "<group>";
 		};
 		FCD6F01D202EA43200FC31F6 /* UI */ = {

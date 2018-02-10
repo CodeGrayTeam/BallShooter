@@ -10,8 +10,8 @@ import SpriteKit
 
 class StarPU: PowerUp {
     
-    init(placement: Int, categoryBitMask: UInt32, contactTestBitMask: UInt32, tileSize:CGFloat, mode: String) {
-        super.init(type: .Star, placement: placement, categoryBitMask: categoryBitMask, contactTestBitMask: contactTestBitMask, tileSize: tileSize, mode: mode)
+    init(placement: Int, categoryBitMask: UInt32, tileSize:CGFloat, mode: String) {
+        super.init(type: .Star, placement: placement, categoryBitMask: categoryBitMask, tileSize: tileSize, mode: mode)
         createNode()
         rotate()
     }
@@ -25,18 +25,17 @@ class StarPU: PowerUp {
         
         tempNode.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 40, height: 40))
         
-        tempNode.physicsBody?.isDynamic = true
+        tempNode.physicsBody?.isDynamic = false
         tempNode.physicsBody?.categoryBitMask = categoryBitMask
-        tempNode.physicsBody?.contactTestBitMask = contactTestBitMask
         tempNode.physicsBody?.collisionBitMask = 0
         tempNode.position = CGPoint(x: xPosition, y: yPosition)
         
-        self.powerUpNode = tempNode
+        powerUpNode = tempNode
     }
     
     //rotate powerUp
     func rotate() {
-        self.powerUpNode.run((SKAction.rotate(byAngle: CGFloat.pi / 2, duration: 0.75)) , completion: {
+        powerUpNode.run((SKAction.rotate(byAngle: CGFloat.pi / 2, duration: 0.75)) , completion: {
             self.rotate()
         })
     }
