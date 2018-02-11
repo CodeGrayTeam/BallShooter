@@ -22,7 +22,7 @@ class Ball {
     var speed:CGFloat!
     
     var rotation:CGFloat!
-    var increaseY:Bool = false
+    var increaseY:Bool = true
     
     var node:SKNode!
     
@@ -67,20 +67,50 @@ class Ball {
         node.physicsBody?.applyImpulse(CGVector(dx: xSpeed, dy: ySpeed))
     }
     
+    /// Description: If a ball gets set to 0 dy after hitting a block or top or bottom
+    /// this will give it some y velocity
     func updateYSpeedIfTooSmall() {
         if let dy = node.physicsBody?.velocity.dy {
-            if (dy < 0.5 && dy > 0) || (dy == 0 && !increaseY) {
-                let impulseY = -0.5 + dy
-                print("Was: \(dy), Impulse: \(impulseY)")
+            if (dy < 0.8 && dy > 0) {
+                let impulseY = -0.8 + dy
                 node.physicsBody?.applyImpulse(CGVector(dx: 0, dy: impulseY))
-            } else if (dy > -0.5 && dy < 0) || (dy == 0 && increaseY) {
-                let impulseY = 0.5 - dy
-                print("Was: \(dy), Impulse: \(impulseY)")
+            } else if (dy > -0.8 && dy < 0) {
+                let impulseY = 0.8 - dy
                 node.physicsBody?.applyImpulse(CGVector(dx: 0, dy: impulseY))
+            } else if dy == 0 {
+                updateYIfZero()
             }
-            
-            if dy == 0 {
-                increaseY = !increaseY
+        }
+    }
+    
+    func updateYIfZero() {
+        if let dy = node.physicsBody?.velocity.dy, dy == 0 {
+            if increaseY {
+                node.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 0.8))
+            } else {
+                node.physicsBody?.applyImpulse(CGVector(dx: 0, dy: -0.8))
+            }
+            increaseY = !increaseY
+        }
+    }
+    
+    /// Description: If a ball gets set to 0 dx after hitting a wall
+    /// this will give it some x velocity
+    ///
+    /// - Parameter isRightWall: Boolean to say if right or left wall
+    func updateXSpeedAfterHittingWall(isRightWall: Bool) {
+        if let dx = node.physicsBody?.velocity.dx {
+            switch isRightWall {
+            case true:
+                if dx < 0.8 && dx >= 0 {
+                    let impulseX = -0.8 + dx
+                    node.physicsBody?.applyImpulse(CGVector(dx: impulseX, dy: 0))
+                }
+            case false:
+                if dx > -0.8 && dx <= 0 {
+                    let impulseX = 0.8 - dx
+                    node.physicsBody?.applyImpulse(CGVector(dx: impulseX, dy: 0))
+                }
             }
         }
     }

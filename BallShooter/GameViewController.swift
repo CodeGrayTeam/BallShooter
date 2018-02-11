@@ -22,7 +22,7 @@ class GameViewController: UIViewController {
             if let scene = SKScene(fileNamed: "GameScene") as? GameScene {
                 // Set the scale mode to scale to fit the window
                 scene.scaleMode = .aspectFill
-                scene.backgroundColor = SKColor.init(red: (113/255), green: (114/255), blue: (164/255), alpha: 1.0)
+                scene.backgroundColor = SKColor(red: (113/255), green: (114/255), blue: (164/255), alpha: 1.0)
                 scene.viewController = self
                 scene.mode = mode
                 
@@ -60,8 +60,8 @@ class GameViewController: UIViewController {
     }
     
     func transitionToGameOver(score: Int) {
-        let gameOverVC = self.storyboard?.instantiateViewController(withIdentifier: "gameOverVC") as! GameOverVC
+        let gameOverVC = storyboard?.instantiateViewController(withIdentifier: "gameOverVC") as! GameOverVC
         gameOverVC.score = score
-        self.present(gameOverVC, animated: true, completion: nil)
+        present(gameOverVC, animated: true, completion: nil)
     }
 }

@@ -121,7 +121,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         highscoreLabel.fontName = "AmericanTypewriter-Bold"
         highscoreLabel.fontSize = 30
         highscoreLabel.fontColor = UIColor.white
-        self.addChild(highscoreLabel)
+        addChild(highscoreLabel)
         
         //Add stars label
         starCountLabel = SKLabelNode(text: "\(defaults.object(forKey: "stars") as? Int ?? 0)")
@@ -129,11 +129,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         starCountLabel.fontName = "AmericanTypewriter-Bold"
         starCountLabel.fontSize = 30
         starCountLabel.fontColor = UIColor.white
-        self.addChild(starCountLabel)
+        addChild(starCountLabel)
         
         starLabel = SKSpriteNode(imageNamed: "star.png")
         starLabel.position = CGPoint(x: GameScene.screenWidth - 130, y: GameScene.screenHeight - remainderHeight)
-        self.addChild(starLabel)
+        addChild(starLabel)
         
         //Add score label
         scoreLabel = SKLabelNode(text: "0")
@@ -141,7 +141,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         scoreLabel.fontName = "AmericanTypewriter-Bold"
         scoreLabel.fontSize = remainderHeight
         scoreLabel.fontColor = UIColor.white
-        self.addChild(scoreLabel)
+        addChild(scoreLabel)
         score = 1
         
         //Add ball amount label
@@ -150,16 +150,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         numBallsLabel.fontName = "AmericanTypewriter-Bold"
         numBallsLabel.fontSize = 20
         numBallsLabel.fontColor = UIColor.white
-        self.addChild(numBallsLabel)
+        addChild(numBallsLabel)
         
         //Add new ball position label
-        newPositionMarker = SKLabelNode(text: "x")
+        newPositionMarker = SKLabelNode(text: "*")
         newPositionMarker.position = CGPoint(x: GameScene.screenWidth / 2, y: remainderHeight + 5)
         newPositionMarker.fontName = "AmericanTypewriter-Bold"
         newPositionMarker.fontSize = 20
         newPositionMarker.fontColor = UIColor.white
         newPositionMarker.isHidden = true
-        self.addChild(newPositionMarker)
+        addChild(newPositionMarker)
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -275,11 +275,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         createLaunchLine(x: x, y: y)
     }
     
-//    func updateRotation() {
-//        balls[0].rotation = ballRotation
-//        balls[0].calculateSpeeds()
-//    }
-    
     func addBricks() {
         
         if mode == "bombDrop" && score % 2 != 0 {
@@ -354,6 +349,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func addBall(shouldLaunch: Bool) {
+        // Make sure ball does not start touching a wall
+        if ballX <= ballRadius + 2 {
+            ballX = ballRadius + 2
+        }
+        if ballX >= GameScene.screenWidth - ballRadius - 2 {
+            ballX =  GameScene.screenWidth - ballRadius - 2
+        }
+        
         let ball = Ball(image: "", borderColour: .white, fillColour: .white, radius: ballRadius, xPosition: ballX, yPosition: ballY + ballRadius, speed: 10, rotation: ballRotation!, categoryBitMask: BallCategory, contactTestBitMask: BrickCategory | KillBallCategory | WallCategory | PowerUpCategory, collisionBitMask: WallCategory | BrickCategory, ballNum: self.ballCount)
         
         balls.append(ball)
@@ -453,7 +456,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 case KillBallCategory:
                     killBall(ballNode: firstNode)
                 case WallCategory:
-                    hitWall(ballNode: firstNode)
+                    if let secondNode = secondBody.node as? SKShapeNode {
+                        hitWall(ballNode: firstNode, wallNode: secondNode)
+                    }
                 case PowerUpCategory:
                     if let secondNode = secondBody.node {
                         ballDidHitPowerUp(ballNode: firstNode, powerUpNode: secondNode)
@@ -465,9 +470,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
-    func hitWall(ballNode: SKShapeNode) {
+    func hitWall(ballNode: SKShapeNode, wallNode: SKNode) {
+        var index = 0
         for i in (0...balls.count - 1).reversed() where balls[i].node == ballNode {
-            balls[i].updateYSpeedIfTooSmall()
+            index = i
+            break
+        }
+        
+        if wallNode == roof || wallNode == bottom {
+            balls[index].updateYSpeedIfTooSmall()
+        } else if wallNode == rightWall {
+            balls[index].updateXSpeedAfterHittingWall(isRightWall: true)
+            balls[index].updateYIfZero()
+        } else if wallNode == leftWall {
+            balls[index].updateXSpeedAfterHittingWall(isRightWall: false)
+            balls[index].updateYIfZero()
         }
     }
     
@@ -479,7 +496,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if bricks[j].brickNode == brickNode {
                 brick = bricks[j]
                 index = j
-                //ball.changeDirection(brick: brick, contact: contact)
                 brick.decreaseValue()
                 break
             }
@@ -487,10 +503,28 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         if brick.value == 0 {
             bricks.remove(at: index)
+            if bricks.count == 0 {
+                setCheckPoint()
+            }
         }
         
         for i in (0...balls.count - 1).reversed() where balls[i].node == ballNode {
             balls[i].updateYSpeedIfTooSmall()
+        }
+    }
+    
+    func setCheckPoint() {
+        if let emitterNode = SKEmitterNode(fileNamed: "Confetti") {
+            emitterNode.position = CGPoint(x: GameScene.screenWidth / 2, y: GameScene.screenHeight / 2)
+            emitterNode.particlePositionRange = CGVector(dx: frame.size.width, dy: frame.size.height)
+            emitterNode.name = "Confetti"
+            emitterNode.zPosition = 10
+            emitterNode.targetNode = self
+            self.addChild(emitterNode)
+            
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 3, execute: {
+                emitterNode.removeFromParent()
+            })
         }
     }
     
@@ -531,13 +565,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if powerUp != nil {
             switch powerUp.type! {
             case .Ball:
-                print("Hit ball")
                 self.additionalBalls += 1
                 powerUp.removeFromScreen()
                 powerUps.remove(at: index)
                 break
             case .Star:
-                print("Hit star")
                 givePlayerStar()
                 powerUp.removeFromScreen()
                 powerUps.remove(at: index)
