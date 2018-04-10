@@ -10,7 +10,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BallShooter/Ball.swift"
-            timestampString = "539995293.435637"
+            timestampString = "540015786.120663"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "45"
@@ -26,7 +26,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BallShooter/Ball.swift"
-            timestampString = "539995293.436167"
+            timestampString = "540015786.120729"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "38"
@@ -42,7 +42,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BallShooter/GameScene.swift"
-            timestampString = "539995293.4364851"
+            timestampString = "540015786.120783"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "48"
@@ -135,11 +135,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BallShooter/GameScene.swift"
-            timestampString = "539995293.436564"
+            timestampString = "540015786.1211981"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "330"
-            endingLineNumber = "330"
+            startingLineNumber = "325"
+            endingLineNumber = "325"
             landmarkName = "addPowerUp()"
             landmarkType = "7">
          </BreakpointContent>
@@ -151,11 +151,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BallShooter/GameScene.swift"
-            timestampString = "539995293.4366339"
+            timestampString = "540015786.1214629"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "327"
-            endingLineNumber = "327"
+            startingLineNumber = "322"
+            endingLineNumber = "322"
             landmarkName = "addBricks()"
             landmarkType = "7">
          </BreakpointContent>
@@ -167,11 +167,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BallShooter/GameScene.swift"
-            timestampString = "539995293.436703"
+            timestampString = "540015786.121848"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "485"
-            endingLineNumber = "485"
+            startingLineNumber = "501"
+            endingLineNumber = "501"
             landmarkName = "ballDidHitBrick(brickNode:ballNode:decreasePoint:contact:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -183,7 +183,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BallShooter/Brick.swift"
-            timestampString = "539995293.436774"
+            timestampString = "540015786.122138"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "50"
@@ -199,7 +199,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BallShooter/Brick.swift"
-            timestampString = "539995293.436829"
+            timestampString = "540015786.12219"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "50"
@@ -215,7 +215,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BallShooter/GameScene.swift"
-            timestampString = "539995293.436882"
+            timestampString = "540015786.122241"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "94"
@@ -231,11 +231,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BallShooter/GameScene.swift"
-            timestampString = "539995293.436949"
+            timestampString = "540015786.122519"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "304"
-            endingLineNumber = "304"
+            startingLineNumber = "299"
+            endingLineNumber = "299"
             landmarkName = "addBricks()"
             landmarkType = "7">
          </BreakpointContent>
@@ -247,11 +247,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BallShooter/GameScene.swift"
-            timestampString = "539995293.4370151"
+            timestampString = "540015786.122767"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "638"
-            endingLineNumber = "638"
+            startingLineNumber = "672"
+            endingLineNumber = "672"
             landmarkName = "endGame()"
             landmarkType = "7">
          </BreakpointContent>
@@ -263,7 +263,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BallShooter/Ball.swift"
-            timestampString = "539995293.437083"
+            timestampString = "540015786.123024"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "66"
@@ -279,7 +279,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BallShooter/GameScene.swift"
-            timestampString = "539995293.437399"
+            timestampString = "540015786.1230741"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "208"
@@ -295,7 +295,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BallShooter/GameScene.swift"
-            timestampString = "539995293.437477"
+            timestampString = "540015786.12332"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "170"
@@ -311,11 +311,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BallShooter/GameScene.swift"
-            timestampString = "539995293.437542"
+            timestampString = "540015786.123562"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "327"
-            endingLineNumber = "327"
+            startingLineNumber = "322"
+            endingLineNumber = "322"
             landmarkName = "addBricks()"
             landmarkType = "7">
          </BreakpointContent>
@@ -327,7 +327,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BallShooter/GameScene.swift"
-            timestampString = "539995293.437608"
+            timestampString = "540015786.123872"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "230"
@@ -375,7 +375,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BallShooter/GameViewController.swift"
-            timestampString = "527788696.295979"
+            timestampString = "540015786.124328"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "13"
@@ -391,11 +391,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BallShooter/GameScene.swift"
-            timestampString = "539995293.4378361"
+            timestampString = "540015786.1244"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "288"
-            endingLineNumber = "288"
+            startingLineNumber = "283"
+            endingLineNumber = "283"
             landmarkName = "addBricks()"
             landmarkType = "7">
          </BreakpointContent>
@@ -407,7 +407,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BallShooter/Ball.swift"
-            timestampString = "539995293.4378999"
+            timestampString = "540015786.124718"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "65"
@@ -423,7 +423,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BallShooter/Ball.swift"
-            timestampString = "539995293.43817"
+            timestampString = "540015786.124771"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "67"
@@ -439,7 +439,119 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BallShooter/GameScene.swift"
-            timestampString = "539995293.438437"
+            timestampString = "540015786.1248209"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "360"
+            endingLineNumber = "360"
+            landmarkName = "addBall(shouldLaunch:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BallShooter/GameScene.swift"
+            timestampString = "540015786.125147"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "663"
+            endingLineNumber = "663"
+            landmarkName = "setTimerForNextLevel()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BallShooter/GameScene.swift"
+            timestampString = "540015786.125473"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "585"
+            endingLineNumber = "585"
+            landmarkName = "removeBall(index:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BallShooter/GameScene.swift"
+            timestampString = "540015786.125752"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "586"
+            endingLineNumber = "586"
+            landmarkName = "removeBall(index:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BallShooter/Ball.swift"
+            timestampString = "540015786.1260149"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "75"
+            endingLineNumber = "75"
+            landmarkName = "updateYSpeedIfTooSmall()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BallShooter/Ball.swift"
+            timestampString = "540015786.126066"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "78"
+            endingLineNumber = "78"
+            landmarkName = "updateYSpeedIfTooSmall()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BallShooter/Ball.swift"
+            timestampString = "540015786.126115"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "79"
+            endingLineNumber = "79"
+            landmarkName = "updateYSpeedIfTooSmall()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BallShooter/GameScene.swift"
+            timestampString = "540015786.126164"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "357"
@@ -455,12 +567,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BallShooter/GameScene.swift"
-            timestampString = "539995293.438507"
+            timestampString = "540015786.1264139"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "629"
-            endingLineNumber = "629"
-            landmarkName = "setTimerForNextLevel()"
+            startingLineNumber = "354"
+            endingLineNumber = "354"
+            landmarkName = "addBall(shouldLaunch:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -471,12 +583,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BallShooter/GameScene.swift"
-            timestampString = "539995293.438567"
+            timestampString = "540015786.1266659"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "551"
-            endingLineNumber = "551"
-            landmarkName = "removeBall(index:)"
+            startingLineNumber = "353"
+            endingLineNumber = "353"
+            landmarkName = "addBall(shouldLaunch:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -487,12 +599,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BallShooter/GameScene.swift"
-            timestampString = "539995293.438627"
+            timestampString = "540015786.126913"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "552"
-            endingLineNumber = "552"
-            landmarkName = "removeBall(index:)"
+            startingLineNumber = "356"
+            endingLineNumber = "356"
+            landmarkName = "addBall(shouldLaunch:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -503,23 +615,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BallShooter/Ball.swift"
-            timestampString = "539995293.438689"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "70"
-            endingLineNumber = "70"
-            landmarkName = "updateYSpeedIfTooSmall()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BallShooter/Ball.swift"
-            timestampString = "539995293.438936"
+            timestampString = "540015786.127162"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "73"
@@ -534,13 +630,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BallShooter/Ball.swift"
-            timestampString = "539995293.439185"
+            filePath = "BallShooter/GameScene.swift"
+            timestampString = "540015786.127213"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "77"
-            endingLineNumber = "77"
-            landmarkName = "updateYSpeedIfTooSmall()"
+            startingLineNumber = "459"
+            endingLineNumber = "459"
+            landmarkName = "didBegin(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -550,13 +646,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BallShooter/Ball.swift"
-            timestampString = "539995293.43941"
+            filePath = "BallShooter/GameScene.swift"
+            timestampString = "540015786.12746"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "79"
-            endingLineNumber = "79"
-            landmarkName = "updateYSpeedIfTooSmall()"
+            startingLineNumber = "474"
+            endingLineNumber = "474"
+            landmarkName = "hitWall(ballNode:wallNode:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
